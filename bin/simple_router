@@ -13,13 +13,54 @@ module SimpleRouterlApp
 
   desc 'Show a routing table'
   arg_name ''
-  command :show do |c|
+  command :show_rt do |c|
     c.desc 'Location to find socket files'
     c.flag [:S, :socket_dir], default_value: Trema::DEFAULT_SOCKET_DIR
 
     c.action do |_global_options, options, args|
       Trema.trema_process('SimpleRouter', options[:socket_dir]).controller.
         show_routing_table()
+    end
+  end
+
+  desc 'Show interfaces'
+  arg_name ''
+  command :show_if do |c|
+    c.desc 'Location to find socket files'
+    c.flag [:S, :socket_dir], default_value: Trema::DEFAULT_SOCKET_DIR
+
+    c.action do |_global_options, options, args|
+      Trema.trema_process('SimpleRouter', options[:socket_dir]).controller.
+        show_interfaces()
+    end
+  end
+
+  desc 'Add entry'
+  arg_name 'dest mask hop'
+  command :add do |c|
+    c.desc 'Location to find socket files'
+    c.flag [:S, :socket_dir], default_value: Trema::DEFAULT_SOCKET_DIR
+
+    c.action do |_global_options, options, args|
+      dest = args[0]
+      mask = args[1]
+      hop = args[2]
+      Trema.trema_process('SimpleRouter', options[:socket_dir]).controller.
+        add_entry(dest,mask,hop)
+    end
+  end
+
+  desc 'Delete entry'
+  arg_name 'dest mask'
+  command :delete do |c|
+    c.desc 'Location to find socket files'
+    c.flag [:S, :socket_dir], default_value: Trema::DEFAULT_SOCKET_DIR
+
+    c.action do |_global_options, options, args|
+      dest = args[0]
+      mask = args[1]
+      Trema.trema_process('SimpleRouter', options[:socket_dir]).controller.
+        delete_entry(dest,mask)
     end
   end
 

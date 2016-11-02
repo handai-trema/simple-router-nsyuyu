@@ -27,6 +27,17 @@ class Interface
     all.each(&block)
   end
 
+  def self.show_interfaces()
+    print("---------- show interfaces ----------\n")
+    print("port_number".center(18))
+    print("mac_address".center(18))
+    print("ip_address".center(18))
+    print("\n")
+    self.all.each do |interface|
+      interface.show()
+    end
+  end
+
   include Pio
 
   attr_reader :mac_address
@@ -47,5 +58,12 @@ class Interface
 
   def netmask
     IPv4Address.new('255.255.255.255').mask(netmask_length)
+  end
+
+  def show
+    print("#{@port_number}".rjust(18))
+    print("#{@mac_address}".rjust(18))
+    print("#{@ip_address}/#{@netmask_length}".rjust(18))
+    print("\n\n")
   end
 end

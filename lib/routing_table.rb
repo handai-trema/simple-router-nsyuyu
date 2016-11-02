@@ -12,7 +12,13 @@ class RoutingTable
   def add(options)
     netmask_length = options.fetch(:netmask_length)
     prefix = IPv4Address.new(options.fetch(:destination)).mask(netmask_length)
+    entry = @db[netmask_length][prefix.to_i]
     @db[netmask_length][prefix.to_i] = IPv4Address.new(options.fetch(:next_hop))
+    if entry then
+      print("success update entry\n")
+    else
+      print("success add entry\n")
+    end
   end
 
   def lookup(destination_ip_address)
@@ -24,13 +30,29 @@ class RoutingTable
     nil
   end
 
+  def delete(options)
+    netmask_length = options.fetch(:netmask_length)
+    prefix = IPv4Address.new(options.fetch(:destination)).mask(netmask_length)
+    entry = @db[netmask_length][prefix.to_i]
+    if entry then
+      @db[netmask_length].delete(prefix.to_i)
+      print("success delete entry\n")
+    else
+      print("error: not found entry")
+    end
+  end
+    
   def show_table()
-    print "netmask_length\t prefix\t next_hop\n"
+    print("---------- show routing table ----------")
+    print("destination".rjust(18))
+    print("next_hop".rjust(18))
+    print("\n")
     @db.each_index do |netmask_length|
       @db[netmask_length].each do |prefix,next_hop|
-        print(netmask_length,"\t")
-        print(prefix,"\t")
-        print(next_hop,"\n")
+        prefix_addr = IPv4Address.new(prefix).to_s
+        print("#{prefix_addr}/#{netmask_length}".rjust(18))
+        print("#{next_hop}".rjust(18))
+        print("\n\n")
       end
     end
   end

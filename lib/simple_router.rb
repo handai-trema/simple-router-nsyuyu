@@ -19,11 +19,21 @@ class SimpleRouter < Trema::Controller
   end
 
   def show_routing_table()
-    print(@routing_table.show_table(),"\n")
+    @routing_table.show_table()
   end
 
-  def show_interface()
-    print @interfaces
+  def show_interfaces()
+    Interface.show_interfaces
+  end
+
+  def add_entry(dest,mask,hop)
+    entry = {destination: dest, netmask_length: mask.to_i, next_hop: hop}
+    @routing_table.add(entry)
+  end
+
+  def delete_entry(dest,mask)
+    entry = {destination: dest, netmask_length: mask.to_i}
+    @routing_table.delete(entry)
   end
 
   # rubocop:disable MethodLength
