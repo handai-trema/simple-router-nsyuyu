@@ -18,6 +18,14 @@ class SimpleRouter < Trema::Controller
     send_flow_mod_delete(dpid, match: Match.new)
   end
 
+  def show_routing_table()
+    print(@routing_table.show_table(),"\n")
+  end
+
+  def show_interface()
+    print @interfaces
+  end
+
   # rubocop:disable MethodLength
   def packet_in(dpid, message)
     return unless sent_to_router?(message)

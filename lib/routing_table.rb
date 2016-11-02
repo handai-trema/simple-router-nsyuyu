@@ -25,4 +25,15 @@ class RoutingTable
     end
     nil
   end
+
+  def show_table()
+    print "netmask_length\t prefix\t next_hop\n"
+    @db.each_index do |netmask_length|
+      @db[netmask_length].each do |prefix,next_hop|
+        print(netmask_length,"\t")
+        print(prefix,"\t")
+        print(next_hop,"\n")
+      end
+    end
+  end
 end
