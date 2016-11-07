@@ -29,9 +29,9 @@ class Interface
 
   def self.show_interfaces()
     print("---------- show interfaces ----------\n")
-    print("port_number".center(18))
-    print("mac_address".center(18))
-    print("ip_address".center(18))
+    print("port_number".rjust(12))
+    print("mac_address".rjust(18))
+    print("ip_address".rjust(16))
     print("\n")
     self.all.each do |interface|
       interface.show()
@@ -61,9 +61,9 @@ class Interface
   end
 
   def show
-    print("#{@port_number}".rjust(18))
+    print("#{@port_number}".rjust(12))
     print("#{@mac_address}".rjust(18))
-    print("#{@ip_address}/#{@netmask_length}".rjust(18))
-    print("\n\n")
+    print("#{@ip_address}/#{@netmask_length}".rjust(16))
+    print("\n")
   end
 end

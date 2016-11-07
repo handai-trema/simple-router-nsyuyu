@@ -43,15 +43,15 @@ class RoutingTable
   end
     
   def show_table()
-    print("---------- show routing table ----------")
-    print("destination".rjust(18))
-    print("next_hop".rjust(18))
+    print("---------- show routing table ----------\n")
+    print("destination".rjust(16))
+    print("next_hop".rjust(16))
     print("\n")
     @db.each_index do |netmask_length|
       @db[netmask_length].each do |prefix,next_hop|
         prefix_addr = IPv4Address.new(prefix).to_s
-        print("#{prefix_addr}/#{netmask_length}".rjust(18))
-        print("#{next_hop}".rjust(18))
+        print("#{prefix_addr}/#{netmask_length}".rjust(16))
+        print("#{next_hop}".rjust(16))
         print("\n\n")
       end
     end
