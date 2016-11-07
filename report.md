@@ -10,8 +10,12 @@
 patch_panelコマンドを参考にすること．
 
 ## 解答
-CLIを作成するにあたって，simple_routerプロセスを動作させるプログラムを新たに作成し(simple_router)，
-interface.rb，routing_table.rb，simple_router.rbに対して，プログラムの追加・修正を行った．
+CLIを作成するにあたって，simple_routerプロセスを動作させるプログラムを新たに作成し
+([simple_router](https://github.com/handai-trema/simple-router-nsyuyu/blob/master/bin/simple_router))，
+[interface.rb](https://github.com/handai-trema/simple-router-nsyuyu/blob/master/lib/interface.rb)，
+[routing_table.rb](https://github.com/handai-trema/simple-router-nsyuyu/blob/master/lib/routing_table.rb)，
+[simple_router.rb](https://github.com/handai-trema/simple-router-nsyuyu/blob/master/lib/simple_router.rb)
+に対して，プログラムの追加・修正を行った．
 
 それぞれの機能の仕様，実装方法，動作確認について，以下に記す．
 なお，動作確認については，それぞれの機能毎ではなく，全てまとめて行った．
@@ -38,7 +42,7 @@ interface.rb，routing_table.rb，simple_router.rbに対して，プログラム
 ルーティングテーブルの表示機能の実現にあたって，SimpleRouterクラスにshow_routing_table関数を，
 RoutingTableクラスにshow_table関数を実装した．
 
-show_routing_table関数のソースコードを以下に示す．
+show_routing_table関数のソースコードを以下に示す
 ```ruby
 21  def show_routing_table()
 22    @routing_table.show_table()
